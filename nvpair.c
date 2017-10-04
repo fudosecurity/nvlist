@@ -1685,11 +1685,10 @@ nvpair_move_number_array(const char *name, uint64_t *value, size_t nitems)
 nvpair_t *
 nvpair_move_nvlist_array(const char *name, nvlist_t **value, size_t nitems)
 {
+	nvpair_t *parent;
 	unsigned int ii;
-	nvpair_t *nvp;
 	int flags;
 
-	nvp = NULL;
 	if (value == NULL || nitems == 0) {
 		ERRNO_SET(EINVAL);
 		return (NULL);
@@ -1702,6 +1701,8 @@ nvpair_move_nvlist_array(const char *name, nvlist_t **value, size_t nitems)
 			goto fail;
 		}
 		if (ii > 0) {
+			nvpair_t *nvp;
+
 			nvp = nvpair_allocv(" ", NV_TYPE_NVLIST,
 			    (uint64_t)(uintptr_t)value[ii], 0, 0);
 			if (nvp == NULL)
