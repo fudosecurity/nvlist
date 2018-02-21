@@ -2,7 +2,7 @@
 # This file is in the Public Domain.
 #
 
-CFLAGS=		-std=c11 -O2 -g -W -Wextra -Werror
+CFLAGS=		-std=c99 -O2 -g -W -Wextra -Werror
 CFLAGS+=	-D_POSIX_C_SOURCE=200809L
 CFLAGS+=	-D_GNU_SOURCE -D_DEFAULT_SOURCE
 CFLAGS+=	-D__FBSDID\(x\)=
@@ -16,7 +16,7 @@ CFLAGS+=	-Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith
 CFLAGS+=	-Wmissing-declarations -Wredundant-decls -Wnested-externs
 CFLAGS+=	-Wshadow -Wcast-qual -Wcast-align -Wwrite-strings
 CFLAGS+=	-Wold-style-definition
-CFLAGS+=	-Wsuggest-attribute=noreturn -Wjump-misses-init
+#CFLAGS+=	-Wsuggest-attribute=noreturn -Wjump-misses-init
 
 # New GCC 6/7 flags:
 #CFLAGS+=	-Wduplicated-cond -Wmisleading-indentation -Wnull-dereference
