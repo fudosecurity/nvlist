@@ -2,7 +2,7 @@
 # This file is in the Public Domain.
 #
 
-CFLAGS=		-std=c99 -O2 -g -W -Wextra -Werror
+CFLAGS=		-std=c99 -O2 -g -W -Wextra -Werror -I.
 CFLAGS+=	-D_POSIX_C_SOURCE=200809L
 CFLAGS+=	-D_GNU_SOURCE -D_DEFAULT_SOURCE
 CFLAGS+=	-D__FBSDID\(x\)=
@@ -38,6 +38,9 @@ OBJS=		nvlist.o nvpair.o dnvlist.o # msgio.o
 
 MANS=		nv.3
 
+TEST_FILES:=	$(filter-out tests/nvlist_send_recv_test.c,$(wildcard tests/*.c))
+TESTS:=		$(patsubst tests/%.c,%,$(TEST_FILES))
+
 $(LIB).la:	LDFLAGS+=	-rpath $(LIBDIR)
 install/%.la:	ILIBDIR=	$(DESTDIR)/$(LIBDIR)
 install:	IINCDIR=	$(DESTDIR)/$(INCDIR)/
@@ -62,11 +65,15 @@ install: $(addprefix install/,$(LIB).la)
 	mkdir -p $(IINCDIR) && install -c $(INCS) $(IINCDIR)
 	mkdir -p $(IMANDIR) && install -c $(MANS) $(IMANDIR)
 
-#tests: $(OBJS)
-#	$(CC) $(CFLAGS) $^ -o t
+%_test: $(OBJS)
+	$(CC) $(CFLAGS) $^ tests/$@.c -o $@ $(LDFLAGS)
+
+tests: $(TESTS)
+	@ for T in $(TESTS); do echo ./$$T; ./$$T; done | \
+	    awk '1; /not ok/ { exit 1; }'
 
 clean:
 	libtool --mode=clean rm
-	@ rm -rf .libs *.o *.lo *.la
+	@ rm -rf .libs *.o *.lo *.la $(TESTS)
 
-.PHONY: all obj lib install clean
+.PHONY: all obj lib tests install clean

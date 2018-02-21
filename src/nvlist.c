@@ -1238,7 +1238,7 @@ nvlist_unpack(const void *buf, size_t size, int flags)
 	return (nvlist_xunpack(buf, size, NULL, 0, flags));
 }
 
-#ifndef _KERNEL
+#if !defined(_KERNEL) && defined(WITH_MSGIO)
 int
 nvlist_send(int sock, const nvlist_t *nvl)
 {

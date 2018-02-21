@@ -29,10 +29,10 @@
  * $FreeBSD: head/lib/libnv/tests/nvlist_free_test.c 285063 2015-07-02 21:58:10Z oshogbo $
  */
 
-#include <sys/nv.h>
-
 #include <stdio.h>
 #include <unistd.h>
+
+#include "nv.h"
 
 static int ntest = 1;
 

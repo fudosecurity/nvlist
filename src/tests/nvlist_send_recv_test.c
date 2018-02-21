@@ -32,7 +32,6 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
-#include <sys/nv.h>
 
 #include <err.h>
 #include <errno.h>
@@ -40,6 +39,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nv.h"
 
 static int ntest = 1;
 
