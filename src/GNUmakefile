@@ -60,6 +60,9 @@ install: $(addprefix install/,$(LIB).la)
 	mkdir -p $(IINCDIR) && install -c $(INCS) $(IINCDIR)
 	#mkdir -p $(IMANDIR) && install -c $(MANS) $(IMANDIR)
 
+#tests: $(OBJS)
+#	$(CC) $(CFLAGS) $^ -o t
+
 clean:
 	libtool --mode=clean rm
 	@ rm -rf .libs *.o *.lo *.la
