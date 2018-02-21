@@ -32,7 +32,6 @@
 __FBSDID("$FreeBSD: head/sys/contrib/libnv/nvlist.c 286796 2015-08-15 06:34:49Z oshogbo $");
 
 #include <sys/param.h>
-#include <sys/endian.h>
 #include <sys/queue.h>
 
 #ifdef _KERNEL
@@ -65,7 +64,7 @@ __FBSDID("$FreeBSD: head/sys/contrib/libnv/nvlist.c 286796 2015-08-15 06:34:49Z 
 #include <pjdlog.h>
 #endif
 
-#include <sys/nv.h>
+#include "nv.h"
 
 #include "nv_impl.h"
 #include "nvlist_impl.h"
@@ -1202,7 +1201,7 @@ nvlist_xunpack(const void *buf, size_t size, const int *fds, size_t nfds,
 			ptr = nvpair_unpack_nvlist_array(isbe, nvp, ptr, &left,
 			    &array);
 			if (ptr == NULL)
-				goto failed;
+				goto fail;
 			PJDLOG_ASSERT(array != NULL);
 			tmpnvl = array;
 			do {

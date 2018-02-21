@@ -47,8 +47,8 @@ __FBSDID("$FreeBSD: head/sys/contrib/libnv/dnvlist.c 285139 2015-07-04 16:33:37Z
 #include <stdlib.h>
 #endif
 
-#include <sys/dnv.h>
-#include <sys/nv.h>
+#include "dnv.h"
+#include "nv.h"
 
 #include "nv_impl.h"
 

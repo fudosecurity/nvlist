@@ -145,9 +145,9 @@ void nvlist_add_null(nvlist_t *nvl, const char *name);
 void nvlist_add_bool(nvlist_t *nvl, const char *name, bool value);
 void nvlist_add_number(nvlist_t *nvl, const char *name, uint64_t value);
 void nvlist_add_string(nvlist_t *nvl, const char *name, const char *value);
-void nvlist_add_stringf(nvlist_t *nvl, const char *name, const char *valuefmt, ...) __printflike(3, 4);
-#ifdef _VA_LIST_DECLARED
-void nvlist_add_stringv(nvlist_t *nvl, const char *name, const char *valuefmt, va_list valueap) __printflike(3, 0);
+void nvlist_add_stringf(nvlist_t *nvl, const char *name, const char *valuefmt, ...) __attribute__((__format__(__printf__,3,4)));
+#if defined(_VA_LIST_DECLARED) || defined(_VA_LIST_DEFINED)
+void nvlist_add_stringv(nvlist_t *nvl, const char *name, const char *valuefmt, va_list valueap) __attribute__((__format__(__printf__,3,0)));
 #endif
 void nvlist_add_nvlist(nvlist_t *nvl, const char *name, const nvlist_t *value);
 void nvlist_add_binary(nvlist_t *nvl, const char *name, const void *value, size_t size);

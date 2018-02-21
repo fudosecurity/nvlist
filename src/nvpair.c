@@ -32,7 +32,6 @@
 __FBSDID("$FreeBSD: head/sys/contrib/libnv/nvpair.c 286796 2015-08-15 06:34:49Z oshogbo $");
 
 #include <sys/param.h>
-#include <sys/endian.h>
 #include <sys/queue.h>
 
 #ifdef _KERNEL
@@ -61,7 +60,7 @@ __FBSDID("$FreeBSD: head/sys/contrib/libnv/nvpair.c 286796 2015-08-15 06:34:49Z 
 #include <pjdlog.h>
 #endif
 
-#include <sys/nv.h>
+#include "nv.h"
 
 #include "nv_impl.h"
 #include "nvlist_impl.h"
@@ -1690,6 +1689,7 @@ nvpair_move_number_array(const char *name, uint64_t *value, size_t nitems)
 nvpair_t *
 nvpair_move_nvlist_array(const char *name, nvlist_t **value, size_t nitems)
 {
+	nvpair_t *nvp = NULL;
 	nvpair_t *parent;
 	unsigned int ii;
 	int flags;
@@ -1706,8 +1706,6 @@ nvpair_move_nvlist_array(const char *name, nvlist_t **value, size_t nitems)
 			goto fail;
 		}
 		if (ii > 0) {
-			nvpair_t *nvp;
-
 			nvp = nvpair_allocv(" ", NV_TYPE_NVLIST,
 			    (uint64_t)(uintptr_t)value[ii], 0, 0);
 			if (nvp == NULL)

@@ -33,6 +33,8 @@
 #ifndef	_NV_IMPL_H_
 #define	_NV_IMPL_H_
 
+#include "nv_compat.h"
+
 #ifndef	_NVPAIR_T_DECLARED
 #define	_NVPAIR_T_DECLARED
 struct nvpair;

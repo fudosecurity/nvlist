@@ -33,7 +33,6 @@
 #ifndef	_NVPAIR_IMPL_H_
 #define	_NVPAIR_IMPL_H_
 
-#include <sys/nv.h>
 #include <sys/queue.h>
 
 #ifndef _KERNEL

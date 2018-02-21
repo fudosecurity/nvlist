@@ -33,8 +33,6 @@
 #ifndef	_NVLIST_IMPL_H_
 #define	_NVLIST_IMPL_H_
 
-#include <sys/nv.h>
-
 #ifndef _KERNEL
 #include <stdint.h>
 #endif
