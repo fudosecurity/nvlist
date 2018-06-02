@@ -2,6 +2,8 @@
 # This file is in the Public Domain.
 #
 
+PROJ=		nv
+
 CFLAGS=		-std=c99 -O2 -g -W -Wextra -Werror -I.
 CFLAGS+=	-D_POSIX_C_SOURCE=200809L
 CFLAGS+=	-D_GNU_SOURCE -D_DEFAULT_SOURCE
@@ -32,7 +34,7 @@ else
 CFLAGS+=	-DNDEBUG
 endif
 
-LIB=		libnv
+LIB=		lib$(PROJ)
 INCS=		nv.h
 OBJS=		nvlist.o nvpair.o dnvlist.o # msgio.o
 
@@ -41,7 +43,7 @@ MANS=		nv.3
 TEST_FILES:=	$(filter-out tests/nvlist_send_recv_test.c,$(wildcard tests/*.c))
 TESTS:=		$(patsubst tests/%.c,%,$(TEST_FILES))
 
-$(LIB).la:	LDFLAGS+=	-rpath $(LIBDIR)
+$(LIB).la:	LDFLAGS+=	-rpath $(LIBDIR) -version-info 1:0:0
 install/%.la:	ILIBDIR=	$(DESTDIR)/$(LIBDIR)
 install:	IINCDIR=	$(DESTDIR)/$(INCDIR)/
 install:	IMANDIR=	$(DESTDIR)/$(MANDIR)/man3/

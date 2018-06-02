@@ -1,5 +1,7 @@
+%define version	%(cat %{_topdir}/version.txt)
+
 Name:		libnv
-Version:	0.1
+Version:	%{version}
 Release:	1%{?dist}
 Summary:	FreeBSD's name/value pairs library
 Group:		System Environment/Libraries

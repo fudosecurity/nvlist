@@ -1,0 +1,33 @@
+Source: nv
+Priority: extra
+Maintainer: https://github.com/wheelsystems/nvlist
+Build-Depends:
+ debhelper (>= 9),
+ make,
+ libtool
+Standards-Version: 3.9.1
+Homepage: https://github.com/rmind/nv
+License: BSD-2-clause
+
+Package: libnv1
+Section: lib
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: FreeBSD's name/value pairs library
+ The libnv library is a general purpose name/value pairs mechanism used
+ in FreeBSD, which was inspired by the nvpairs used in Solaris/illumos.
+ It is a lightweight serialization (marshalling) library.
+
+Package: libnv1-dbg
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, libnv1 (= ${binary:Version})
+Description: Debug symbols for libnv1
+ Debug symbols for libnv1.
+
+Package: libnv-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libnv1 (= ${binary:Version})
+Description: Development files for libnv1
+ Development files for libnv1.
