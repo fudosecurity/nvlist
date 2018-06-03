@@ -35,7 +35,7 @@ CFLAGS+=	-DNDEBUG
 endif
 
 LIB=		lib$(PROJ)
-INCS=		nv.h
+INCS=		nv.h dnv.h
 OBJS=		nvlist.o nvpair.o dnvlist.o # msgio.o
 
 MANS=		nv.3
