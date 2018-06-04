@@ -26,4 +26,4 @@ See the FreeBSD's [nv(9) manual page](https://www.freebsd.org/cgi/man.cgi?query=
 
 Just build the package, install it and link the library using the `-lnv` flag.
 * RPM (tested on RHEL/CentOS 7): `cd pkg && make rpm`
-* DEB (tested on Debian 9): `cd pkg && make deb`
+* DEB (tested on Debian 9/Ubuntu): `cd pkg && make deb`
