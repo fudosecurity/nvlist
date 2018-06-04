@@ -8,7 +8,7 @@ It is a lightweight serialization (marshalling) library.  The implementation
 is written in C99 and distributed under the 2-clause BSD license.
 
 The libnv library was implemented by Pawel Jakub Dawidek under sponsorship
-from the FreeBSD Foundation.
+from the FreeBSD Foundation and Mariusz Zaborski.
 
 Upstream: https://github.com/wheelsystems/nvlist/
 
