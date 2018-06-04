@@ -16,6 +16,12 @@ Upstream: https://github.com/wheelsystems/nvlist/
 
 See the FreeBSD's [nv(9) manual page](https://www.freebsd.org/cgi/man.cgi?query=nvlist&apropos=0&sektion=0&manpath=FreeBSD+12-current&arch=default&format=html).
 
+[Introduction to nvlist part 1 on oshogbo blog](http://oshogbo.vexillium.org/blog/42/).
+
+[Introduction to nvlist part 2 - dnvlist on oshogbo blog](http://oshogbo.vexillium.org/blog/43/).
+
+[Introduction to nvlist part 3 - simple traversing on oshogbo blog](http://oshogbo.vexillium.org/blog/45/).
+
 ## Packages
 
 Just build the package, install it and link the library using the `-lnv` flag.
