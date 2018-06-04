@@ -1,6 +1,6 @@
 # FreeBSD's name/value pairs library
 
-[![Build Status](https://travis-ci.org/rmind/nvlist.svg?branch=master)](https://travis-ci.org/rmind/nvlist)
+[![Build Status](https://travis-ci.org/wheelsystems/nvlist.svg?branch=master)](https://travis-ci.org/wheelsystems/nvlist)
 
 The **libnv** library is a general purpose name/value pairs mechanism used
 in FreeBSD, which was inspired by the nvpairs used in Solaris/illumos.
