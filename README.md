@@ -14,7 +14,7 @@ Upstream: https://github.com/wheelsystems/nvlist/
 
 ## Documentation and API
 
-See the FreeBSD's [nv(9) manual page](https://www.freebsd.org/cgi/man.cgi?query=nv&apropos=0&sektion=0&manpath=FreeBSD+11.1-RELEASE&arch=default&format=html).
+See the FreeBSD's [nv(9) manual page](https://www.freebsd.org/cgi/man.cgi?query=nvlist&apropos=0&sektion=0&manpath=FreeBSD+12-current&arch=default&format=html).
 
 ## Packages
 
