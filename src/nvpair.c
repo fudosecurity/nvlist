@@ -146,10 +146,11 @@ nvpair_allocv(const char *name, int type, uint64_t data, size_t datasize,
 static int
 nvpair_append(nvpair_t *nvp, const void *value, size_t valsize, size_t datasize)
 {
-	const size_t oldlen = nvp->nvp_nitems * valsize;
-	void *olddata = (void *)(uintptr_t)nvp->nvp_data;
-	void *data, *valp;
+	void *olddata, *data, *valp;
+	size_t oldlen;
 
+	oldlen = nvp->nvp_nitems * valsize;
+	olddata = (void *)(uintptr_t)nvp->nvp_data;
 	data = nv_realloc(olddata, oldlen + valsize);
 	if (data == NULL) {
 		ERRNO_SET(ENOMEM);
@@ -1972,7 +1973,7 @@ nvpair_append_string_array(nvpair_t *nvp, const char *value)
 int
 nvpair_append_nvlist_array(nvpair_t *nvp, const nvlist_t *value)
 {
-	nvpair_t *tmpnvp = NULL;
+	nvpair_t *tmpnvp;
 	nvlist_t *nvl, *prev;
 	int flags;
 
@@ -1990,6 +1991,7 @@ nvpair_append_nvlist_array(nvpair_t *nvp, const nvlist_t *value)
 	flags = nvlist_flags(nvl) | NV_FLAG_IN_ARRAY;
 	nvlist_set_flags(nvl, flags);
 
+	tmpnvp = NULL;
 	if (nvp->nvp_nitems > 0) {
 		nvlist_t **nvls = (void *)(uintptr_t)nvp->nvp_data;
 
