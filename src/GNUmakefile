@@ -7,7 +7,7 @@ PROJ=		nv
 CFLAGS+=	-std=c99 -O2 -g -Wall -Wextra -Werror
 CFLAGS+=	-D_POSIX_C_SOURCE=200809L
 CFLAGS+=	-D_GNU_SOURCE -D_DEFAULT_SOURCE
-CFLAGS+=	-D__FBSDID\(x\)=
+CFLAGS+=	-DWITH_MSGIO -D__FBSDID\(x\)=
 
 #
 # Extended warning flags.
@@ -36,11 +36,11 @@ endif
 
 LIB=		lib$(PROJ)
 INCS=		nv.h dnv.h
-OBJS=		nvlist.o nvpair.o dnvlist.o # msgio.o
+OBJS=		nvlist.o nvpair.o dnvlist.o msgio.o
 
 MANS=		nv.3
 
-TEST_FILES:=	$(filter-out tests/nvlist_send_recv_test.c,$(wildcard tests/*.c))
+TEST_FILES:=	$(wildcard tests/*.c)
 TESTS:=		$(patsubst tests/%.c,%,$(TEST_FILES))
 
 $(LIB).la:	LDFLAGS+=	-rpath $(LIBDIR) -version-info 1:0:0

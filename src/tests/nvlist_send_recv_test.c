@@ -33,6 +33,7 @@
 #include <sys/socket.h>
 #include <sys/wait.h>
 
+#include <stdlib.h>
 #include <err.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -59,6 +60,7 @@ child(int sock)
 {
 	nvlist_t *nvl;
 	nvlist_t *empty;
+	int pfd[2];
 
 	nvl = nvlist_create(0);
 	empty = nvlist_create(0);
@@ -74,7 +76,16 @@ child(int sock)
 	nvlist_add_string(nvl, "nvlist/string/", "");
 	nvlist_add_string(nvl, "nvlist/string/x", "x");
 	nvlist_add_string(nvl, "nvlist/string/abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz");
+
 	nvlist_add_descriptor(nvl, "nvlist/descriptor/STDERR_FILENO", STDERR_FILENO);
+	if (pipe(pfd) == -1)
+		err(EXIT_FAILURE, "pipe");
+	if (write(pfd[1], "test", 4) != 4)
+		err(EXIT_FAILURE, "write");
+	close(pfd[1]);
+	nvlist_add_descriptor(nvl, "nvlist/descriptor/pipe_rd", pfd[0]);
+	close(pfd[0]);
+
 	nvlist_add_binary(nvl, "nvlist/binary/x", "x", 1);
 	nvlist_add_binary(nvl, "nvlist/binary/abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz", sizeof("abcdefghijklmnopqrstuvwxyz"));
 	nvlist_move_nvlist(nvl, "nvlist/nvlist/empty", empty);
@@ -92,8 +103,9 @@ parent(int sock)
 	const nvlist_t *cnvl, *empty;
 	const char *name, *cname;
 	void *cookie, *ccookie;
-	int type, ctype;
+	int type, ctype, fd;
 	size_t size;
+	char buf[4];
 
 	nvl = nvlist_recv(sock, 0);
 	CHECK(nvlist_error(nvl) == 0);
@@ -173,6 +185,15 @@ parent(int sock)
 	CHECK(type == NV_TYPE_DESCRIPTOR);
 	CHECK(strcmp(name, "nvlist/descriptor/STDERR_FILENO") == 0);
 	CHECK(fd_is_valid(nvlist_get_descriptor(nvl, name)));
+
+	name = nvlist_next(nvl, &type, &cookie);
+	CHECK(name != NULL);
+	CHECK(type == NV_TYPE_DESCRIPTOR);
+	CHECK(strcmp(name, "nvlist/descriptor/pipe_rd") == 0);
+	fd = nvlist_get_descriptor(nvl, name);
+	CHECK(fd_is_valid(fd));
+	CHECK(read(fd, buf, sizeof(buf)) == 4);
+	CHECK(strncmp(buf, "test", sizeof(buf)) == 0);
 
 	name = nvlist_next(nvl, &type, &cookie);
 	CHECK(name != NULL);
@@ -279,6 +300,12 @@ parent(int sock)
 
 	cname = nvlist_next(cnvl, &ctype, &ccookie);
 	CHECK(cname != NULL);
+	CHECK(ctype == NV_TYPE_DESCRIPTOR);
+	CHECK(strcmp(cname, "nvlist/descriptor/pipe_rd") == 0);
+	CHECK(fd_is_valid(nvlist_get_descriptor(cnvl, cname)));
+
+	cname = nvlist_next(cnvl, &ctype, &ccookie);
+	CHECK(cname != NULL);
 	CHECK(ctype == NV_TYPE_BINARY);
 	CHECK(strcmp(cname, "nvlist/binary/x") == 0);
 	CHECK(memcmp(nvlist_get_binary(cnvl, cname, NULL), "x", 1) == 0);
@@ -313,7 +340,7 @@ main(void)
 	int status, socks[2];
 	pid_t pid;
 
-	printf("1..134\n");
+	printf("1..144\n");
 	fflush(stdout);
 
 	if (socketpair(PF_UNIX, SOCK_STREAM, 0, socks) < 0)
