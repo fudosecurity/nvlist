@@ -4,7 +4,7 @@
 
 PROJ=		nv
 
-CFLAGS=		-std=c99 -O2 -g -W -Wextra -Werror -I.
+CFLAGS+=	-std=c99 -O2 -g -Wall -Wextra -Werror
 CFLAGS+=	-D_POSIX_C_SOURCE=200809L
 CFLAGS+=	-D_GNU_SOURCE -D_DEFAULT_SOURCE
 CFLAGS+=	-D__FBSDID\(x\)=
@@ -29,7 +29,7 @@ DEBUG=		1
 endif
 
 ifeq ($(DEBUG),1)
-CFLAGS+=	-Og -ggdb -fno-omit-frame-pointer -DDEBUG
+CFLAGS+=	-Og -DDEBUG -fno-omit-frame-pointer
 else
 CFLAGS+=	-DNDEBUG
 endif
@@ -68,7 +68,7 @@ install: $(addprefix install/,$(LIB).la)
 	mkdir -p $(IMANDIR) && install -c $(MANS) $(IMANDIR)
 
 %_test: $(OBJS)
-	$(CC) $(CFLAGS) $^ tests/$@.c -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) -I. $^ tests/$@.c -o $@ $(LDFLAGS)
 
 tests: $(TESTS)
 	@ for T in $(TESTS); do echo ./$$T; ./$$T; done | \
