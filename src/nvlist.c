@@ -249,6 +249,8 @@ nvpair_t *
 nvlist_get_array_next_nvpair(nvlist_t *nvl)
 {
 
+	NVLIST_ASSERT(nvl);
+
 	return (nvl->nvl_array_next);
 }
 
