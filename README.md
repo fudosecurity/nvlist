@@ -22,6 +22,8 @@ See the FreeBSD's [nv(9) manual page](https://www.freebsd.org/cgi/man.cgi?query=
 
 [Introduction to nvlist part 3 - simple traversing on oshogbo blog](http://oshogbo.vexillium.org/blog/45/).
 
+[Introduction to nvlist part 4 - cnvlist on oshogbo blog](http://oshogbo.vexillium.org/blog/47/).
+
 ## Packages
 
 Just build the package, install it and link the library using the `-lnv` flag.
