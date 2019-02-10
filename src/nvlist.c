@@ -249,7 +249,7 @@ nvpair_t *
 nvlist_get_array_next_nvpair(nvlist_t *nvl)
 {
 
-	return nvl->nvl_array_next;
+	return (nvl->nvl_array_next);
 }
 
 bool
