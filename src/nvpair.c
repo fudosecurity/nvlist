@@ -234,7 +234,8 @@ nvpair_remove_nvlist_array(nvpair_t *nvp)
 }
 
 void
-nvpair_remove(struct nvl_head *head, nvpair_t *nvp, const nvlist_t *nvl __unused)
+nvpair_remove(struct nvl_head *head, nvpair_t *nvp,
+    const nvlist_t *nvl __unused)
 {
 
 	NVPAIR_ASSERT(nvp);
