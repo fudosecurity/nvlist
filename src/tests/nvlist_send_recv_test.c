@@ -336,7 +336,7 @@ parent(int sock)
 	nvlist_destroy(nvl);
 }
 
-int
+static void
 send_nvlist(void)
 {
 	int status, socks[2];
