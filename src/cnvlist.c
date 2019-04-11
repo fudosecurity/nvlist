@@ -48,8 +48,8 @@ __FBSDID("$FreeBSD: head/sys/contrib/libnv/cnvlist.c 335343 2018-06-18 21:26:58Z
 #include <stdlib.h>
 #endif
 
-#include <sys/cnv.h>
-#include <sys/nv.h>
+#include "cnv.h"
+#include "nv.h"
 
 #include "nv_impl.h"
 #include "nvlist_impl.h"
