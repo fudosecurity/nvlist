@@ -10,7 +10,7 @@ is written in C99 and distributed under the 2-clause BSD license.
 The libnv library was implemented by Pawel Jakub Dawidek under sponsorship
 from the FreeBSD Foundation and Mariusz Zaborski.
 
-Upstream: https://github.com/wheelsystems/nvlist/
+Upstream: https://github.com/fudosecurity/nvlist/
 
 ## Documentation and API
 
