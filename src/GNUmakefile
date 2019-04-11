@@ -38,7 +38,7 @@ endif
 
 LIB=		lib$(PROJ)
 INCS=		nv.h dnv.h
-OBJS=		nvlist.o nvpair.o dnvlist.o msgio.o
+OBJS=		nvlist.o nvpair.o cnvlist.o dnvlist.o msgio.o
 
 MANS=		nv.3
 
