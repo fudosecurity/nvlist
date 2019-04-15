@@ -41,6 +41,8 @@ INCS=		nv.h cnv.h dnv.h
 OBJS=		nvlist.o nvpair.o cnvlist.o dnvlist.o msgio.o
 
 MANS=		nv.3
+MANS+=		cnv.3
+MANS+=		dnv.3
 
 TEST_FILES:=	$(wildcard tests/*.c)
 TESTS:=		$(patsubst tests/%.c,%,$(TEST_FILES))

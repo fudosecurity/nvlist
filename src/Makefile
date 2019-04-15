@@ -18,6 +18,10 @@ SRCS+=	nvpair.c
 
 WARNS?=	6
 
+MAN=	nv.3
+MAN+=	cnv.3
+MAN+=	dnv.3
+
 .if ${MK_TESTS} != "no"
 SUBDIR+=	tests
 .endif
