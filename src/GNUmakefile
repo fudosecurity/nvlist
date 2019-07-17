@@ -46,6 +46,7 @@ MANS+=		dnv.3
 
 TEST_FILES:=	$(wildcard tests/*.c)
 TESTS:=		$(patsubst tests/%.c,%,$(TEST_FILES))
+TESTS:=		$(filter-out nvlist_send_recv_test, $(TESTS))
 
 $(LIB).la:	LDFLAGS+=	-rpath $(LIBDIR) -version-info 1:0:0
 install/%.la:	ILIBDIR=	$(DESTDIR)/$(LIBDIR)
